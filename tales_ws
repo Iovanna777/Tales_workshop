@@ -1,0 +1,1840 @@
+{
+  "name": "Мастерская Сказок",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1100,
+        900
+      ],
+      "id": "6a1f9f01-b63b-46b7-bea2-a295b44b0f6e",
+      "name": "Telegram Trigger Response1",
+      "webhookId": "c88974df-a9a5-49cf-96ab-bc9ca385dc18",
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "b6e69a1f-eb42-4ef6-b80c-3167f1b8c830",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.child_name && $json.age && $json.gender && $json.prefered_topic && $json.style }}",
+              "rightValue": 0
+            },
+            {
+              "id": "b91d1bd3-4706-4444-8cc1-76412485888b",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "b841ed82-7d6b-4e3a-be2d-a53024af07eb",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "001303b1-b64d-406a-a54f-25b90776f94d",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "e43db8d2-dd43-4273-a5ff-a2572c1f73f9",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "ad07457b-4638-428a-bb76-e35f04dc0a81",
+      "name": "If User exists1",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        460,
+        1060
+      ],
+      "typeVersion": 2.1,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "tales",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Preserve Data').item.json.user_id }}"
+            },
+            {
+              "fieldId": "chat_id",
+              "fieldValue": "={{ $('Preserve Data').item.json.chat_id }}"
+            },
+            {
+              "fieldId": "child_name",
+              "fieldValue": "={{ $('Preserve Data').item.json.child_name }}"
+            },
+            {
+              "fieldId": "age",
+              "fieldValue": "={{ $('Preserve Data').item.json.age }}"
+            },
+            {
+              "fieldId": "gender",
+              "fieldValue": "={{ $('Preserve Data').item.json.gender }}"
+            },
+            {
+              "fieldId": "prefered_topic",
+              "fieldValue": "={{ $('Preserve Data').item.json.prefered_topic }}"
+            },
+            {
+              "fieldId": "object",
+              "fieldValue": "={{ $('Preserve Data').item.json.object }}"
+            },
+            {
+              "fieldId": "problem_topic",
+              "fieldValue": "={{ $('Preserve Data').item.json.problem_topic }}"
+            },
+            {
+              "fieldId": "style",
+              "fieldValue": "={{ $('Preserve Data').item.json.style }}"
+            },
+            {
+              "fieldId": "creation_date",
+              "fieldValue": "={{ $('Preserve Data').item.json.creation_date }}"
+            }
+          ]
+        }
+      },
+      "id": "435ce786-0df2-4a77-ae2d-5b11f38fffdf",
+      "name": "Create User1",
+      "type": "n8n-nodes-base.supabase",
+      "position": [
+        300,
+        840
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f9f7ecb6-1eb4-4573-82ac-dc3e008ab760",
+              "name": "user_id",
+              "value": "={{ $json.user_id || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "02c00f11-f093-4527-90f3-36cde10c3fdf",
+              "name": "chat_id",
+              "value": "={{ $json.chat_id }}",
+              "type": "number"
+            },
+            {
+              "id": "fedaa211-d52c-4067-8a59-aaa646c67862",
+              "name": "child_name",
+              "value": "={{ $json.child_name }}",
+              "type": "string"
+            },
+            {
+              "id": "77813542-c010-47e3-8fcb-5c23edb000fa",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "04860ee0-67eb-4fe3-8eaa-f74f4e854534",
+              "name": "gender",
+              "value": "={{ $json.gender }}",
+              "type": "string"
+            },
+            {
+              "id": "c4e02dcc-9400-459d-af45-f8ce6d73f380",
+              "name": "prefered_topic",
+              "value": "={{ $json.prefered_topic }}",
+              "type": "string"
+            },
+            {
+              "id": "028adfae-096c-4f32-81fd-20428f050de3",
+              "name": "object",
+              "value": "={{ $json.object }}",
+              "type": "string"
+            },
+            {
+              "id": "5f1eed38-4eba-468d-9360-66fdbf86ec83",
+              "name": "problem_topic",
+              "value": "={{ $json.problem_topic }}",
+              "type": "string"
+            },
+            {
+              "id": "aae02d72-7176-48cf-bc43-8e79e7ce332c",
+              "name": "style",
+              "value": "={{ $json.style }}",
+              "type": "string"
+            },
+            {
+              "id": "0082f1ea-5c9f-47c9-bb05-b0012b9fc7a9",
+              "name": "creation_date",
+              "value": "={{ $json.creation_date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -760,
+        900
+      ],
+      "id": "90745a1a-5c37-44ae-b946-173f3ffd999e",
+      "name": "Preserve Data"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "==Твоя миссия — выполнить трёхэтапный план:\n**Шаг 1: Сочини волшебную сказку.**\nИспользуй всю свою магию и напиши уникальную, добрую сказку для ребёнка на основе данных ниже. Следуй своей роли сказочника-психолога. Сохрани текст сказки как простую строку в переменную `output`.\n\n**Шаг 2: Сохрани готовую сказку.**\nКогда шедевр будет готов, немедленно вызови инструмент `Save Tale to Content` и передай в него следующие параметры:\n- `user_id`: {{ $json.user_id }}\n- `tale_text`: содержимое переменной `output` (полный текст сказки)\n- `creation_date`: {{ $json.creation_date }}\n**ИНФОРМАЦИЯ ДЛЯ РАБОТЫ:**\n- User ID: {{ $json.user_id }}\n- Chat ID: {{ $json.chat_id }}\n- Имя ребёнка: {{ $json.child_name }}\n- Возраст: {{ $json.age }}\n- Пол: {{ $json.gender }}\n- Любимая тема: {{ $json.prefered_topic }}\n- Герой в сказке:{{ $json.object }}\n- Проблема/Тема сказки: {{ $json.problem_topic }}\n- Стиль: {{ $json.style }}\n\n--- \nТвой финальный ответ — это только текст сгенерированной сказки как простая строка в `output`. Никаких дополнительных структур или объектов. После генерации сразу вызови инструмент для сохранения.",
+        "options": {
+          "systemMessage": "=# ROLE:\n\nYou are a kind storyteller, a wise and sensitive children's writer and psychologist. Your superpower is creating unique, therapeutic and engaging stories for children. You speak in simple, understandable language, use your imagination to the fullest, and always end your stories on a positive, hopeful note.\n\n\n# GENERAL INSTRUCTIONS:\n\n1. Your task is to write a unique fairy tale based on information about the child provided by the user.\n\n2. Always make the child whose name is specified in the request the main character.\n\n3. Harmoniously weave their interests, family, and pets into the plot, if specified.\n\n4. The plot should be built around the theme or problem specified in the request and offer a kind, positive solution through metaphor and adventure.\n\n5. Adapt the language and complexity to the child's age. Avoid frightening scenes, violence, and complex moral dilemmas.\n\n6. Always stick to the style (bedtime, funny, instructive) specified in the request.\n\n7. Be sure to give the fairy tale a beautiful title at the end. Answer in Russian.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        940,
+        640
+      ],
+      "id": "430b4b43-0ebc-48f7-b812-221c3e1f1a32",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {
+          "maxTokens": 700
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        940,
+        880
+      ],
+      "id": "cd374df2-ee90-4f5f-8387-2797bf97a69b",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "6whbKHg0kO9eHjrH",
+          "name": "testflowsales"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    user_id: $input.first()?.json?.message?.from?.id || \"0\",\n    chat_id: $input.first()?.json?.message?.chat?.id || \"0\",\n    child_name: $input.first()?.json?.child_name || \"\",\n    age: parseInt($input.first()?.json?.age) || 0,\n    gender: $input.first()?.json?.gender || \"\",\n    prefered_topic: $input.first()?.json?.prefered_topic || \"\",\n    object: $input.first()?.json?.object || \"\",\n    problem_topic: $input.first()?.json?.problem_topic || \"\",\n    style: $input.first()?.json?.style || \"\"\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        1080
+      ],
+      "id": "53c67641-4c50-4d0d-9a38-ae3e1d2eaf4b",
+      "name": "Code3",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "chatId": "=1712474014",
+        "text": "={{ $('Pollinations Text Generator').item.json.data }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2220,
+        640
+      ],
+      "id": "56733b5b-3367-40c7-9476-788ec16c2798",
+      "name": "Send a text message1",
+      "webhookId": "2c1ba883-4a69-45cb-89b7-673aa134f740",
+      "alwaysOutputData": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.user_id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        1120,
+        880
+      ],
+      "id": "4bf0853c-8ca4-4c4e-95c9-1d1102d947ad",
+      "name": "Postgres Chat Memory1",
+      "credentials": {
+        "postgres": {
+          "id": "QaFPE4BMmajVkbb4",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "tales",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $node['Preserve Data'].json.user_id }}"
+            },
+            {
+              "keyName": "child_name",
+              "condition": "neq",
+              "keyValue": "\"\""
+            },
+            {
+              "keyName": "age",
+              "condition": "neq",
+              "keyValue": "0"
+            },
+            {
+              "keyName": "gender",
+              "condition": "neq",
+              "keyValue": "\"\""
+            },
+            {
+              "keyName": "prefered_topic",
+              "condition": "neq",
+              "keyValue": "\"\""
+            },
+            {
+              "keyName": "object",
+              "condition": "neq",
+              "keyValue": "\"\""
+            },
+            {
+              "keyName": "problem_topic",
+              "condition": "neq",
+              "keyValue": "\"\""
+            },
+            {
+              "keyName": "style",
+              "condition": "neq",
+              "keyValue": "\"\""
+            }
+          ]
+        }
+      },
+      "id": "f6a755ef-bb20-4b9e-a23a-943fd5bd97c1",
+      "name": "Find user",
+      "type": "n8n-nodes-base.supabase",
+      "position": [
+        -620,
+        900
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Используй этот инструмент, чтобы сохранить готовую сказку в базу данных. Инструмент принимает следующие параметры: {{ $('IF: Есть данные для сказки?').item.json.user_id }}, tale_text (полный текст сгенерированной сказки), {{ $('IF: Есть данные для сказки?').item.json.creation_date }}.\n",
+        "tableId": "tales_content",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "tale_text",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', ``, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        880
+      ],
+      "id": "bd0cef65-538a-489b-ae25-5b6f1a0b95a4",
+      "name": "Save Tale to Content",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c9a33fe0-4360-4c63-b0fc-e31f0b3af1c1",
+              "leftValue": "={{ $json.child_name }}",
+              "rightValue": "/(имя|лет|мальчик|девочка|любит|тема|стиль)/i",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "dba1ded2-feb8-4884-8b92-1304deed7600",
+              "leftValue": "={{ $json.age }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "841c46ef-2e3e-4990-bd0e-a08feeefb0e9",
+              "leftValue": "={{ $json.gender }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b01e2478-c49a-4c49-ab58-09391fdde684",
+              "leftValue": "={{ $json.prefered_topic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "1b09a45c-a545-4891-9ddf-5372fb1f2ddb",
+              "leftValue": "={{ $json.object }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "6b2147c2-0ebd-4e75-8f04-2419f31bca0b",
+              "leftValue": "={{ $json.problem_topic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "7256be8e-f3e1-4fae-a914-749c92e76637",
+              "leftValue": "={{ $json.style }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        540,
+        840
+      ],
+      "id": "7eb9a6c4-441d-4490-a996-c728900b617b",
+      "name": "IF: Есть данные для сказки?"
+    },
+    {
+      "parameters": {
+        "jsCode": "const message = $input.first()?.json?.message;\nconst callbackData = $input.first()?.json?.callback_query?.data || '';\nconst inputText = message?.text || '';\n\nconst extractAnswers = (text, callback) => {\n  const answers = {\n    name: '',\n    age: 0,\n    gender: '',\n    prefered_topic: '',\n    object: '',\n    problem_topic: '',\n    style: ''\n  };\n\n  // Разделяем текст по строкам\n  const lines = text.split('\\n').map(line => line.trim()).filter(line => line);\n\n  // Маппинг строк на поля\n  if (lines.length >= 7) {\n    answers.name = lines[0] || ''; // Павел\n    answers.age = parseInt(lines[1]) || 0; // 4\n    answers.gender = lines[2]?.toLowerCase().includes('мальчик') ? 'М' : (lines[2]?.toLowerCase().includes('девочка') ? 'Ж' : ''); // мальчик\n    answers.prefered_topic = lines[3]?.trim() || ''; // динозавров\n    answers.object = lines[4]?.replace(/хочет\\s+сказку\\s+про\\s+/i, '').trim() || ''; // динозавра Еврика\n    answers.problem_topic = lines[5]?.replace(/(?:боязнь|страх)\\s+/i, '').trim() || ''; // темноты\n    answers.style = lines[6]?.trim() || ''; // успокаивающий\n  }\n\n  // Обработка callback_data (для инлайн-кнопок)\n  if (callback) {\n    const [key, value] = callback.split(':');\n    if (key === 'gender') answers.gender = value;\n    if (key === 'style') answers.style = value;\n  }\n\n  return answers;\n};\n\nconst answers = extractAnswers(inputText, callbackData);\n\nreturn [{\n  json: {\n    user_id: message?.from?.id || \"0\",\n    chat_id: message?.chat?.id || \"0\",\n    child_name: answers.name,\n    age: answers.age,\n    gender: answers.gender,\n    prefered_topic: answers.prefered_topic,\n    object: answers.object,\n    problem_topic: answers.problem_topic,\n    style: answers.style,\n    creation_date: new Date().toISOString(),\n    raw_text: inputText,\n    debug: JSON.stringify({ message, callbackData, answers, lines: inputText.split('\\n') })\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -940,
+        900
+      ],
+      "id": "894ecce2-c808-4aa3-84c1-3e802335c421",
+      "name": "Preprocess Text2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "=Привет, дорогой родитель! Давай создадим волшебную сказку для твоего малыша! 😊 Напиши мне всё одним сообщением, разделяя ответы запятыми или пунктами, вот что нужно:\n\n- Имя главного героя (имя твоего ребёнка),\n- Сколько лет малышу,\n- Пол (мальчик или девочка),\n- Что ребёнок любит (например, динозавры, космос, рисование, котята),\n- Кого малыш был бы рад видеть в сказке (например, мама Аня, папа Саша, щенок Ёся),\n- Какую тему затронуть в сказке (например, страх темноты, нежелание делиться),\n- Какой стиль сказки выбрать (успокаивающий, весёлый, поучительный).\n\nЖду твои ответы, и мы начнём творить чудеса!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        740,
+        860
+      ],
+      "id": "bc03afa5-e7a0-4073-9d9d-9c79a012086c",
+      "name": "Send a text message",
+      "webhookId": "99a681c6-4ad2-4503-9cb3-c76370826097",
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "tales",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.user_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $json.user_id }}"
+            },
+            {
+              "fieldId": "chat_id",
+              "fieldValue": "={{ $json.chat_id }}"
+            },
+            {
+              "fieldId": "child_name",
+              "fieldValue": "={{ $('Preserve Data').item.json.child_name }}"
+            },
+            {
+              "fieldId": "age",
+              "fieldValue": "={{ $('Preserve Data').item.json.age }}"
+            },
+            {
+              "fieldId": "gender",
+              "fieldValue": "={{ $('Preserve Data').item.json.gender }}"
+            },
+            {
+              "fieldId": "prefered_topic",
+              "fieldValue": "={{ $('Preserve Data').item.json.prefered_topic }}"
+            },
+            {
+              "fieldId": "object",
+              "fieldValue": "={{ $('Preserve Data').item.json.object }}"
+            },
+            {
+              "fieldId": "problem_topic",
+              "fieldValue": "={{ $('Preserve Data').item.json.problem_topic }}"
+            },
+            {
+              "fieldId": "style",
+              "fieldValue": "={{ $('Preserve Data').item.json.style }}"
+            },
+            {
+              "fieldId": "creation_date",
+              "fieldValue": "={{ $json.creation_date }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        300,
+        1060
+      ],
+      "id": "da5ac5b5-8b89-491e-964e-f3c2c42bfbf8",
+      "name": "Update a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f7e3612d-5704-4fae-bd5d-0fbc2083a572",
+              "name": "=data",
+              "value": "={{ $json }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        900
+      ],
+      "id": "bbd0f06f-5393-43c8-ab98-603f3247e395",
+      "name": "log_result"
+    },
+    {
+      "parameters": {
+        "jsCode": "function cleanAndExtractJSON(response) {\n    try {\n        const result = {\n            image_prompt: []\n        };\n\n        // Проверяем, есть ли choices и content\n        if (response.choices && response.choices[0] && response.choices[0].message && response.choices[0].message.content) {\n            result.image_prompt.push(response.choices[0].message.content.trim());\n        } else {\n            result.image_prompt.push(\"Default prompt\"); // Фallback\n        }\n\n        return { json: result };\n    } catch (error) {\n        return { \n            json: {\n                image_prompt: [\"Default prompt\"]\n            }\n        };\n    }\n}\n\nconst response = $input.first().json;\nreturn cleanAndExtractJSON(response);"
+      },
+      "id": "76fee2b1-dfae-4f86-9c15-f931c6b96496",
+      "name": "Code - Clean Json",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1140,
+        1100
+      ],
+      "executeOnce": false,
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "for (let i = 0; i < items.length; i++) {\n  items[i].json.fileName = `images_${(i + 1).toString().padStart(3, '0')}.png`;\n}\nreturn items;"
+      },
+      "id": "4a2a43f0-b42c-4707-8099-718f49944346",
+      "name": "Code - Set Filename",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1620,
+        1100
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "tales_content",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "image_url",
+              "condition": "eq",
+              "keyValue": "empty"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_url",
+              "fieldValue": "={{ $json.image_url }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        1100
+      ],
+      "id": "36b89e42-166d-4b8b-aee3-8e4a72ebe1ed",
+      "name": "Update a row1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nfor (let i = 0; i < items.length; i++) {\n  if (items[i].binary && items[i].binary.image_binary) {\n    items[i].json.image_url = `/files/images_${(i + 1).toString().padStart(3, '0')}.png`; // Путь для Supabase\n    items[i].binary.fileName = items[i].json.fileName; // Связываем с именем\n  } else {\n    items[i].json.image_url = \"https://default-image-url.com/image.png\"; // Фallback\n  }\n}\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        1100
+      ],
+      "id": "407473d0-db11-4d58-a155-b92a14f519f5",
+      "name": "Processed image"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1a0746c5-56f9-4481-b200-298da7bfc7b1",
+              "name": "model",
+              "value": "flux",
+              "type": "string"
+            },
+            {
+              "id": "49fb1dc2-af25-4c12-b3f5-f35f32640510",
+              "name": "width",
+              "value": "1080",
+              "type": "string"
+            },
+            {
+              "id": "5d98464b-f2f1-4115-a861-6e0d0613d66c",
+              "name": "height",
+              "value": "1624",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1840,
+        1100
+      ],
+      "id": "54091fbf-df13-4d5f-9d29-8ea77b106d15",
+      "name": "Установка размеров"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $node['Preprocess Text2']?.json || {};\nconst logResult = $node['log_result']?.json?.data || {}; // Берем весь объект из Find user\n\n// Параметры из входных данных\nconst userId = inputData.user_id || \"0\";\nconst chatId = inputData.chat_id || \"0\";\nconst creationDate = inputData.creation_date || new Date().toISOString();\n\n// Данные для вывода, с приоритетом на logResult для существующих данных\nconst outputData = {\n  id: logResult.id || \"\",\n  user_id: userId,\n  chat_id: chatId,\n  child_name: inputData.child_name || logResult.child_name || \"\",\n  age: inputData.age || logResult.age || 0,\n  gender: inputData.gender || logResult.gender || \"\",\n  prefered_topic: inputData.prefered_topic || logResult.prefered_topic || \"\",\n  object: inputData.object || logResult.object || \"\",\n  problem_topic: inputData.problem_topic || logResult.problem_topic || \"\",\n  style: inputData.style || logResult.style || \"\",\n  tale_text: logResult.tale_text || \"\",\n  creation_date: creationDate\n};\n\n// Отладка\nconsole.log(\"Input Data:\", inputData);\nconsole.log(\"Log Result Data:\", logResult);\n\nif (!inputData || Object.keys(inputData).length === 0) {\n  throw new Error(\"No valid input data from Preprocess Text2\");\n}\n\nreturn [{\n  json: outputData\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        900
+      ],
+      "id": "30a10040-a63e-4d54-94df-913d092ed7b7",
+      "name": "Determine Action"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e0190c85-85f6-4474-8a6b-4d22750ccc55",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "94dd028c-5bda-4fa8-801a-2f886679f27d",
+              "leftValue": "={{ $json.child_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "7cf38be9-90b8-441c-bd23-2fcd158f4232",
+              "leftValue": "={{ $json.age }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "7a7b38e6-3a9e-4bac-8517-ca72f8c5d4fb",
+              "leftValue": "={{ $json.prefered_topic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "1bf6b000-d293-4138-bede-fb217cfd77f1",
+              "leftValue": "={{ $json.user_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "291c4ae0-442c-43a4-96d2-4de719f1622f",
+              "leftValue": "={{ $json.chat_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "c694868b-4498-4ddc-a5cd-0ebf42b9fc31",
+              "leftValue": "={{ $json.object }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "96e83c7a-86a0-4f55-b9e6-532ed0e9d6b4",
+              "leftValue": "={{ $json.gender }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "d9372f46-00d9-4bf7-b432-433712901d92",
+              "leftValue": "={{ $json.style }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -120,
+        900
+      ],
+      "id": "217b86f2-b64e-481b-aed3-8dcf7674ecf3",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "=1712474014",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "={{ $json.choices[0].message.content }}",
+          "fileName": "={{ $json.fileName }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1980,
+        640
+      ],
+      "id": "bceb9dc6-c6f9-4921-ad61-efd7a79d60f1",
+      "name": "Send a photo message",
+      "webhookId": "2c1ba883-4a69-45cb-89b7-673aa134f740",
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1560,
+        640
+      ],
+      "id": "e6e50dc0-5a5a-47e2-952c-229b45c0cff2",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "image/png"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"inputs\": \"{{ $('Code - Get Prompt1').item.json.inputs }}\",\n  \"parameters\": {\n    \"negative_prompt\": \"blurry, low quality\",\n    \"width\": {{ $json.width }},\n    \"height\": {{ $json.height }}\n  }\n}",
+        "options": {}
+      },
+      "id": "a7d0f913-7ec6-424d-83bf-15d0a83d5c85",
+      "name": "HTTP Request - Create Image1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2080,
+        1100
+      ],
+      "retryOnFail": true,
+      "typeVersion": 4.2,
+      "alwaysOutputData": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "0eSIuX3U1Btr1Mr5",
+          "name": "Hugging face Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "sonar-pro",
+        "messages": {
+          "message": [
+            {
+              "content": "=You are a creative copywriter and storyteller, specializing in crafting engaging titles and descriptions for children's content. Your task is to generate a creative, kind headline and a short description based on the provided fairy tale text.\n\nInput Fairy Tale:\n{{ $json.data }}\n\nTask:\nBased on the text above, create the following:\n\n    A Headline: It should be creative, kind, and capture the main essence of the story. The answer should contain only the output without \"Headline\".\n\n    A Short Description: It must be warm, inviting, and no longer than 100 characters.\n\nThe final output should be suitable for a children's story platform, sparking curiosity in both kids and parents. The answer should contain only the output without \"A Short Description\".\n"
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        640
+      ],
+      "id": "e8fea4a8-c129-4525-b32f-d85a773f8f72",
+      "name": "Заголовокк и краткое описание",
+      "credentials": {
+        "perplexityApi": {
+          "id": "vRen1LLdUPmFS0Gz",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "sonar-pro",
+        "messages": {
+          "message": [
+            {
+              "content": "=Create a concise image generation prompt in English (up to 100 words) for the fairy tale below. Include key plot elements, central characters, visual style (e.g., watercolor, cartoonish), and a child-appropriate, hopeful mood. Use these details:\n- Tale text: {{ $json.data }}\nReturn only the image generation prompt, describing the key scene, characters, and atmosphere suitable for the child's age."
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        920,
+        1100
+      ],
+      "id": "ce8cfaba-afa6-4fa7-a11f-54bd194ef158",
+      "name": "Промпт для картинки",
+      "credentials": {
+        "perplexityApi": {
+          "id": "vRen1LLdUPmFS0Gz",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.first()?.json || {};\nconst prompt = inputData.image_prompt?.[0] || '';\n\nconsole.log('Debug - Prompt:', prompt);\n\nif (!prompt) {\n  throw new Error(\"Пустой промпт! Проверь данные из Code - Clean Json.\");\n}\n\nreturn [{\n  json: {\n    inputs: prompt,\n    parameters: {\n      negative_prompt: \"blurry, low quality\"\n    }\n  }\n}];"
+      },
+      "id": "55f03a00-d5ad-46a7-ab78-902fa4e4eda4",
+      "name": "Code - Get Prompt1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1380,
+        1100
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fileName": "image.jpg",
+        "options": {
+          "append": false
+        }
+      },
+      "name": "Save Image",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        640
+      ],
+      "id": "2fbf59af-9022-4638-839b-31b65769f1b5",
+      "alwaysOutputData": true,
+      "notes": "Save audio file"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1100,
+        580
+      ],
+      "id": "ad095efd-b8c5-466d-827c-f14e470c1d8b",
+      "name": "Telegram Trigger Response",
+      "webhookId": "c88974df-a9a5-49cf-96ab-bc9ca385dc18",
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=1712474014",
+        "text": "={{ $json.tale_text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        120,
+        560
+      ],
+      "id": "2749afa2-5467-4f5a-a3b0-8c18e77429b5",
+      "name": "Send a text message2",
+      "webhookId": "2c1ba883-4a69-45cb-89b7-673aa134f740",
+      "alwaysOutputData": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "rktMjqgMcM7jAuOr",
+          "name": "Testbot for tales Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "tales_content",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "keyValue": "={{ $('Telegram Trigger Response').item.json.message.from.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        580
+      ],
+      "id": "bc9b38d3-7c28-4a12-a2b5-34745acca348",
+      "name": "Get a row",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "AJ5ovwVNt26ftH2R",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "sonar-pro",
+        "messages": {
+          "message": [
+            {
+              "content": "=Ты помощник, который ищет сказки в таблице Supabase 'tales_content' по столбцу 'tale_text'. Игнорируй падежи и регистр, ищи по ключевым словам. Если ничего не найдено, предложи создать новую сказку.\n",
+              "role": "system"
+            },
+            {
+              "content": "=Выдели из сообщения только то, про что идет запрос - предмет, объект, животное, человек, действующее лицо сказки {{ $json.message.text }}.\n\nВ ответе дай только этот персонаж для поиска в базе данных в именительном падеже. "
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 200
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        580
+      ],
+      "id": "047af78d-c419-432a-a422-47696a96720f",
+      "name": "Message a model",
+      "credentials": {
+        "perplexityApi": {
+          "id": "vRen1LLdUPmFS0Gz",
+          "name": "Korvin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tale_text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "984e020a-0727-4801-9852-dccdc6fa181a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "59df87c1-9cb8-4084-a452-a64b921fe3de",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -180,
+        580
+      ],
+      "id": "31a86b5a-3f99-4d96-9b39-05ce44709159",
+      "name": "Switch1"
+    }
+  ],
+  "pinData": {
+    "Update a row": [
+      {
+        "json": {
+          "id": "f3d77310-e19e-4b21-8bcc-682736661f05",
+          "user_id": 1712474014,
+          "chat_id": 1712474014,
+          "child_name": "Имя - Анна",
+          "age": 4,
+          "gender": "Ж",
+          "prefered_topic": "любит котят",
+          "object": "котенка Кроху",
+          "problem_topic": "нежелание делиться",
+          "style": "веселый",
+          "tale_text": "",
+          "creation_date": "2025-07-24T10:17:27.027+00:00"
+        }
+      }
+    ],
+    "Промпт для картинки": [
+      {
+        "json": {
+          "id": "f63f0f50-21e3-4874-b9a8-2fa37145cc37",
+          "model": "sonar-pro",
+          "created": 1753431872,
+          "usage": {
+            "prompt_tokens": 468,
+            "completion_tokens": 98,
+            "total_tokens": 566,
+            "search_context_size": "low"
+          },
+          "citations": [
+            "https://lukomoryefolklore.wordpress.com/2020/10/29/cat-bayun/",
+            "https://en.wikipedia.org/wiki/Silver_Hoof",
+            "https://www.rachaelkoppendrayer.com/portfolio/russian-fairy-tale/",
+            "https://www.goodreads.com/book/show/5988782-koshka-s-tales",
+            "https://www.youtube.com/watch?v=xmUUVqmXM6o"
+          ],
+          "search_results": [
+            {
+              "title": "Cat Bayun - Lukomorye - WordPress.com",
+              "url": "https://lukomoryefolklore.wordpress.com/2020/10/29/cat-bayun/",
+              "date": "2020-10-29",
+              "last_updated": "2025-07-25"
+            },
+            {
+              "title": "Silver Hoof",
+              "url": "https://en.wikipedia.org/wiki/Silver_Hoof",
+              "date": "2025-01-02",
+              "last_updated": "2025-03-29"
+            },
+            {
+              "title": "The Learned Cat: A Russian Fairy Tale",
+              "url": "https://www.rachaelkoppendrayer.com/portfolio/russian-fairy-tale/",
+              "date": "2024-12-12",
+              "last_updated": "2025-02-15"
+            },
+            {
+              "title": "Koshka's Tales: Stories from Russia by James Mayhew",
+              "url": "https://www.goodreads.com/book/show/5988782-koshka-s-tales",
+              "date": null,
+              "last_updated": null
+            },
+            {
+              "title": "Zhiharka, Kolobok, The Cat and The Fox | Super Toons - ...",
+              "url": "https://www.youtube.com/watch?v=xmUUVqmXM6o",
+              "date": "2025-02-25",
+              "last_updated": "2025-07-01"
+            }
+          ],
+          "object": "chat.completion",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "A tiny, brave kitten named Kroha, just a bit larger than a toy mouse, sets off from her cozy woodland cottage into a sun-dappled, flower-filled forest. She helps a small bee tangled in branches, meets a wise owl, and guides a lost bunny to his mother. Illustrate in soft watercolor style, with cheerful, bright colors, gentle forest light, and a hopeful, child-friendly mood, capturing Kroha’s kind heart and her magical, uplifting adventure."
+              },
+              "delta": {
+                "role": "assistant",
+                "content": ""
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "Code - Get Prompt1": [
+      {
+        "json": {
+          "inputs": "A tiny, brave kitten named Kroha, just a bit larger than a toy mouse, sets off from her cozy woodland cottage into a sun-dappled, flower-filled forest. She helps a small bee tangled in branches, meets a wise owl, and guides a lost bunny to his mother. Illustrate in soft watercolor style, with cheerful, bright colors, gentle forest light, and a hopeful, child-friendly mood, capturing Kroha’s kind heart and her magical, uplifting adventure.",
+          "parameters": {
+            "negative_prompt": "blurry, low quality"
+          }
+        }
+      }
+    ],
+    "Telegram Trigger Response": [
+      {
+        "json": {
+          "update_id": 923344198,
+          "message": {
+            "message_id": 30,
+            "from": {
+              "id": 1712474014,
+              "is_bot": false,
+              "first_name": "Po °❀⋆.ೃ࿔*:･",
+              "last_name": "Ly ઇଓ ִֶָ",
+              "username": "PoLy_Samborskaya",
+              "language_code": "ru"
+            },
+            "chat": {
+              "id": 1712474014,
+              "first_name": "Po °❀⋆.ೃ࿔*:･",
+              "last_name": "Ly ઇଓ ִֶָ",
+              "username": "PoLy_Samborskaya",
+              "type": "private"
+            },
+            "date": 1753437165,
+            "text": "найди сказку про кроху"
+          }
+        }
+      }
+    ],
+    "Message a model": [
+      {
+        "json": {
+          "id": "a195b4e5-639b-4918-acc0-07aabeae5085",
+          "model": "sonar-pro",
+          "created": 1753443887,
+          "usage": {
+            "prompt_tokens": 133,
+            "completion_tokens": 3,
+            "total_tokens": 136,
+            "search_context_size": "low"
+          },
+          "citations": [
+            "https://citaty.info/character/velikan-anton-kroha",
+            "https://nsportal.ru/detskiy-sad/materialy-dlya-roditeley/2017/10/01/osobennosti-chteniya-skazok-o-zhivotnyh",
+            "https://www.livelib.ru/review/4557536-skazki-printsessy-krohi-evgeniya-spiteri",
+            "https://db.chgk.info/random/from_2014-01-01/answers/types12/256011559/limit1000",
+            "https://www.youtube.com/watch?v=TarX2qxxC0E"
+          ],
+          "search_results": [
+            {
+              "title": "Великан Антон / «Кроха»: 1 цитата персонажа",
+              "url": "https://citaty.info/character/velikan-anton-kroha",
+              "date": null,
+              "last_updated": null
+            },
+            {
+              "title": "особенности чтения сказок о животных | Консультация на тему",
+              "url": "https://nsportal.ru/detskiy-sad/materialy-dlya-roditeley/2017/10/01/osobennosti-chteniya-skazok-o-zhivotnyh",
+              "date": "2017-10-01",
+              "last_updated": "2025-06-07"
+            },
+            {
+              "title": "Между нами, принцессами или как одна маленькая ...",
+              "url": "https://www.livelib.ru/review/4557536-skazki-printsessy-krohi-evgeniya-spiteri",
+              "date": "2024-10-25",
+              "last_updated": null
+            },
+            {
+              "title": "Случайный пакет | Что? Где? Когда?. - db .chgk. info",
+              "url": "https://db.chgk.info/random/from_2014-01-01/answers/types12/256011559/limit1000",
+              "date": "2014-01-01",
+              "last_updated": "2025-07-24"
+            },
+            {
+              "title": "Что такое хорошо и что такое плохо Маяковский Сказки ...",
+              "url": "https://www.youtube.com/watch?v=TarX2qxxC0E",
+              "date": "2021-01-26",
+              "last_updated": "2025-05-06"
+            }
+          ],
+          "object": "chat.completion",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "Кроха"
+              },
+              "delta": {
+                "role": "assistant",
+                "content": ""
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "Get a row": [
+      {
+        "json": {
+          "id": 29,
+          "user_id": 1712474014,
+          "tale_text": "Жила-была маленькая кошечка по имени Кроха. Она была очень милой и веселой, с пушистым мехом и огромными выразительными глазами. Кроха обожала играть с игрушками и особенно любила свой самый любимый мячик, который был ярко-розового цвета. Но вот беда: Кроха совершенно не хотела делиться им с другими! Каждый день, когда её друзья — котята Мила и Пухля — приходили поиграть, Кроха держала свой мячик крепко при себе и не позволяла никому к нему приблизиться. — Это мой мячик! — хвасталась Кроха. — Я буду играть одна! Но иногда, когда её друзья играли без неё, Кроха чувствовала себя немного грустной. Она смотрела, как Мила и Пухля веселятся, и ей становилось обидно. Хоть они и звались «друзьями», она никогда не позволяла им присоединиться к игре. Однажды, Кроха сидела на солнышке и думала о том, как хорошо было бы веселиться всем вместе. Вдруг к ней подошла уважаемая старая кошка по имени Сиа, которая была мудрой и всегда знала, как помочь. — Почему ты не играешь с друзьями, Кроха? — спросила Сиа с доброй улыбкой. — Я не хочу делиться своим мячиком! Он только мой, — ответила Кроха, потирая лапкой носик. — Но, — сказала Сиа, — когда ты делишься, ты можешь создать много радостных моментов. Представь себе, как весело будет, если вы будете играть втроём! Кроха задумалась. Она представила, как Мила и Пухля улыбаются, когда они все вместе гоняют мячик по травке. Стало даже немного завидно. — Как ты думаешь, что произойдет, если ты позволишь им поиграть с тобой? — спросила старая кошка. — Наверное, я буду чувствовать себя лучше, — тихо ответила Кроха. — Точно! — воскликнула Сиа. — Давай попробуем. Кроха собрала все свои силы и протянула мячик друзьям. — Мила, Пухля, хотите поиграть вместе? — тихо спросила она. Тут же на их лицах расцвели улыбки! Они начали гонять мячик туда-сюда, смеяться и веселиться вместе. Кроха почувствовала, как её сердце наполнило тепло. Ей стало легко и радостно, ведь она теперь знала, что делиться — это прекрасно! С тех пор маленькая котенка Кроха всегда играла вместе со своими друзьями, и они делали каждую игру особенной. Объединившись, они могли создавать самые удивительные приключения, полные смеха и радости. **Сказка о котенке К",
+          "created_at": "2025-07-24T14:45:54.744054",
+          "embedding": null,
+          "image_url": null
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger Response1": {
+      "main": [
+        [
+          {
+            "node": "Preprocess Text2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If User exists1": {
+      "main": [
+        [
+          {
+            "node": "IF: Есть данные для сказки?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create User1": {
+      "main": [
+        [
+          {
+            "node": "IF: Есть данные для сказки?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preserve Data": {
+      "main": [
+        [
+          {
+            "node": "Find user",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Промпт для картинки",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Заголовокк и краткое описание",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Create User1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find user": {
+      "main": [
+        [
+          {
+            "node": "log_result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Tale to Content": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: Есть данные для сказки?": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preprocess Text2": {
+      "main": [
+        [
+          {
+            "node": "Preserve Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row": {
+      "main": [
+        [
+          {
+            "node": "If User exists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "log_result": {
+      "main": [
+        [
+          {
+            "node": "Determine Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Clean Json": {
+      "main": [
+        [
+          {
+            "node": "Code - Get Prompt1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Set Filename": {
+      "main": [
+        [
+          {
+            "node": "Установка размеров",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Processed image": {
+      "main": [
+        [
+          {
+            "node": "Update a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Установка размеров": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - Create Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Determine Action": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Update a row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create User1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Save Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a photo message": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - Create Image1": {
+      "main": [
+        [
+          {
+            "node": "Processed image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Заголовокк и краткое описание": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Промпт для картинки": {
+      "main": [
+        [
+          {
+            "node": "Code - Clean Json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Get Prompt1": {
+      "main": [
+        [
+          {
+            "node": "Code - Set Filename",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Image": {
+      "main": [
+        [
+          {
+            "node": "Send a photo message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger Response": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a row": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Get a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preprocess Text2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b4f46350-614e-4c3b-b11a-f5bcca3771d1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eede5a0f19a88813312a63afca12c1745489ee42d3a347c580ae58112f7bc486"
+  },
+  "id": "s0utv35VyertNS7e",
+  "tags": []
+}
