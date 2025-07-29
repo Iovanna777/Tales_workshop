@@ -1,5 +1,4 @@
 {
-  "name": "Мастерская Сказок",
   "nodes": [
     {
       "parameters": {
@@ -11,8 +10,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -1100,
-        900
+        -1600,
+        700
       ],
       "id": "6a1f9f01-b63b-46b7-bea2-a295b44b0f6e",
       "name": "Telegram Trigger Response1",
@@ -93,8 +92,8 @@
       "name": "If User exists1",
       "type": "n8n-nodes-base.if",
       "position": [
-        460,
-        1060
+        360,
+        1040
       ],
       "typeVersion": 2.1,
       "alwaysOutputData": true
@@ -151,8 +150,8 @@
       "name": "Create User1",
       "type": "n8n-nodes-base.supabase",
       "position": [
-        300,
-        840
+        140,
+        820
       ],
       "typeVersion": 1,
       "credentials": {
@@ -233,8 +232,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -760,
-        900
+        -800,
+        960
       ],
       "id": "90745a1a-5c37-44ae-b946-173f3ffd999e",
       "name": "Preserve Data"
@@ -242,7 +241,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "==Твоя миссия — выполнить трёхэтапный план:\n**Шаг 1: Сочини волшебную сказку.**\nИспользуй всю свою магию и напиши уникальную, добрую сказку для ребёнка на основе данных ниже. Следуй своей роли сказочника-психолога. Сохрани текст сказки как простую строку в переменную `output`.\n\n**Шаг 2: Сохрани готовую сказку.**\nКогда шедевр будет готов, немедленно вызови инструмент `Save Tale to Content` и передай в него следующие параметры:\n- `user_id`: {{ $json.user_id }}\n- `tale_text`: содержимое переменной `output` (полный текст сказки)\n- `creation_date`: {{ $json.creation_date }}\n**ИНФОРМАЦИЯ ДЛЯ РАБОТЫ:**\n- User ID: {{ $json.user_id }}\n- Chat ID: {{ $json.chat_id }}\n- Имя ребёнка: {{ $json.child_name }}\n- Возраст: {{ $json.age }}\n- Пол: {{ $json.gender }}\n- Любимая тема: {{ $json.prefered_topic }}\n- Герой в сказке:{{ $json.object }}\n- Проблема/Тема сказки: {{ $json.problem_topic }}\n- Стиль: {{ $json.style }}\n\n--- \nТвой финальный ответ — это только текст сгенерированной сказки как простая строка в `output`. Никаких дополнительных структур или объектов. После генерации сразу вызови инструмент для сохранения.",
+        "text": "==Твоя миссия — выполнить трёхэтапный план:\n**Шаг 1: Сочини волшебную сказку.**\nИспользуй всю свою магию и напиши уникальную, добрую сказку для ребёнка на основе данных ниже. Следуй своей роли сказочника-психолога. Сохрани текст сказки как простую строку в переменную `output`.\n\n**Шаг 2: Сохрани готовую сказку.**\nКогда шедевр будет готов, немедленно вызови инструмент `Save Tale to Content` и передай в него следующие параметры:\n- `user_id`: {{ $json.user_id }}\n- `tale_text`: содержимое переменной `output` (полный текст сказки){{ $json.tale_text }}\n- `creation_date`: {{ $json.creation_date }}\n**ИНФОРМАЦИЯ ДЛЯ РАБОТЫ:**\n- User ID: {{ $json.user_id }}\n- Chat ID: {{ $json.chat_id }}\n- Имя ребёнка: {{ $json.child_name }}\n- Возраст: {{ $json.age }}\n- Пол: {{ $json.gender }}\n- Любимая тема: {{ $json.prefered_topic }}\n- Герой в сказке:{{ $json.object }}\n- Проблема/Тема сказки: {{ $json.problem_topic }}\n- Стиль: {{ $json.style }}\n\n--- \nТвой финальный ответ — это только текст сгенерированной сказки как простая строка в `output`. Никаких дополнительных структур или объектов. После генерации сразу вызови инструмент для сохранения.",
         "options": {
           "systemMessage": "=# ROLE:\n\nYou are a kind storyteller, a wise and sensitive children's writer and psychologist. Your superpower is creating unique, therapeutic and engaging stories for children. You speak in simple, understandable language, use your imagination to the fullest, and always end your stories on a positive, hopeful note.\n\n\n# GENERAL INSTRUCTIONS:\n\n1. Your task is to write a unique fairy tale based on information about the child provided by the user.\n\n2. Always make the child whose name is specified in the request the main character.\n\n3. Harmoniously weave their interests, family, and pets into the plot, if specified.\n\n4. The plot should be built around the theme or problem specified in the request and offer a kind, positive solution through metaphor and adventure.\n\n5. Adapt the language and complexity to the child's age. Avoid frightening scenes, violence, and complex moral dilemmas.\n\n6. Always stick to the style (bedtime, funny, instructive) specified in the request.\n\n7. Be sure to give the fairy tale a beautiful title at the end. Answer in Russian.\n\n"
         }
@@ -250,37 +249,11 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        940,
+        620,
         640
       ],
       "id": "430b4b43-0ebc-48f7-b812-221c3e1f1a32",
       "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
-        "options": {
-          "maxTokens": 700
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        940,
-        880
-      ],
-      "id": "cd374df2-ee90-4f5f-8387-2797bf97a69b",
-      "name": "OpenAI Chat Model1",
-      "credentials": {
-        "openAiApi": {
-          "id": "6whbKHg0kO9eHjrH",
-          "name": "testflowsales"
-        }
-      }
     },
     {
       "parameters": {
@@ -289,8 +262,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        640,
-        1080
+        620,
+        1060
       ],
       "id": "53c67641-4c50-4d0d-9a38-ae3e1d2eaf4b",
       "name": "Code3",
@@ -298,15 +271,17 @@
     },
     {
       "parameters": {
-        "chatId": "=1712474014",
-        "text": "={{ $('Pollinations Text Generator').item.json.data }}",
-        "additionalFields": {}
+        "chatId": "={{ $('Telegram Trigger Response1').item.json.message.chat.id }}",
+        "text": "={{ $('AI Agent').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2220,
-        640
+        1980,
+        620
       ],
       "id": "56733b5b-3367-40c7-9476-788ec16c2798",
       "name": "Send a text message1",
@@ -328,8 +303,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        1120,
-        880
+        720,
+        480
       ],
       "id": "4bf0853c-8ca4-4c4e-95c9-1d1102d947ad",
       "name": "Postgres Chat Memory1",
@@ -365,26 +340,6 @@
               "keyName": "gender",
               "condition": "neq",
               "keyValue": "\"\""
-            },
-            {
-              "keyName": "prefered_topic",
-              "condition": "neq",
-              "keyValue": "\"\""
-            },
-            {
-              "keyName": "object",
-              "condition": "neq",
-              "keyValue": "\"\""
-            },
-            {
-              "keyName": "problem_topic",
-              "condition": "neq",
-              "keyValue": "\"\""
-            },
-            {
-              "keyName": "style",
-              "condition": "neq",
-              "keyValue": "\"\""
             }
           ]
         }
@@ -394,7 +349,7 @@
       "type": "n8n-nodes-base.supabase",
       "position": [
         -620,
-        900
+        960
       ],
       "typeVersion": 1,
       "alwaysOutputData": false,
@@ -422,8 +377,8 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        1280,
-        880
+        820,
+        480
       ],
       "id": "bd0cef65-538a-489b-ae25-5b6f1a0b95a4",
       "name": "Save Tale to Content",
@@ -522,24 +477,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        540,
-        840
+        360,
+        820
       ],
       "id": "7eb9a6c4-441d-4490-a996-c728900b617b",
       "name": "IF: Есть данные для сказки?"
-    },
-    {
-      "parameters": {
-        "jsCode": "const message = $input.first()?.json?.message;\nconst callbackData = $input.first()?.json?.callback_query?.data || '';\nconst inputText = message?.text || '';\n\nconst extractAnswers = (text, callback) => {\n  const answers = {\n    name: '',\n    age: 0,\n    gender: '',\n    prefered_topic: '',\n    object: '',\n    problem_topic: '',\n    style: ''\n  };\n\n  // Разделяем текст по строкам\n  const lines = text.split('\\n').map(line => line.trim()).filter(line => line);\n\n  // Маппинг строк на поля\n  if (lines.length >= 7) {\n    answers.name = lines[0] || ''; // Павел\n    answers.age = parseInt(lines[1]) || 0; // 4\n    answers.gender = lines[2]?.toLowerCase().includes('мальчик') ? 'М' : (lines[2]?.toLowerCase().includes('девочка') ? 'Ж' : ''); // мальчик\n    answers.prefered_topic = lines[3]?.trim() || ''; // динозавров\n    answers.object = lines[4]?.replace(/хочет\\s+сказку\\s+про\\s+/i, '').trim() || ''; // динозавра Еврика\n    answers.problem_topic = lines[5]?.replace(/(?:боязнь|страх)\\s+/i, '').trim() || ''; // темноты\n    answers.style = lines[6]?.trim() || ''; // успокаивающий\n  }\n\n  // Обработка callback_data (для инлайн-кнопок)\n  if (callback) {\n    const [key, value] = callback.split(':');\n    if (key === 'gender') answers.gender = value;\n    if (key === 'style') answers.style = value;\n  }\n\n  return answers;\n};\n\nconst answers = extractAnswers(inputText, callbackData);\n\nreturn [{\n  json: {\n    user_id: message?.from?.id || \"0\",\n    chat_id: message?.chat?.id || \"0\",\n    child_name: answers.name,\n    age: answers.age,\n    gender: answers.gender,\n    prefered_topic: answers.prefered_topic,\n    object: answers.object,\n    problem_topic: answers.problem_topic,\n    style: answers.style,\n    creation_date: new Date().toISOString(),\n    raw_text: inputText,\n    debug: JSON.stringify({ message, callbackData, answers, lines: inputText.split('\\n') })\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -940,
-        900
-      ],
-      "id": "894ecce2-c808-4aa3-84c1-3e802335c421",
-      "name": "Preprocess Text2"
     },
     {
       "parameters": {
@@ -550,8 +492,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        740,
-        860
+        620,
+        880
       ],
       "id": "bc03afa5-e7a0-4073-9d9d-9c79a012086c",
       "name": "Send a text message",
@@ -624,8 +566,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        300,
-        1060
+        140,
+        1040
       ],
       "id": "da5ac5b5-8b89-491e-964e-f3c2c42bfbf8",
       "name": "Update a row",
@@ -654,7 +596,7 @@
       "typeVersion": 3.4,
       "position": [
         -480,
-        900
+        960
       ],
       "id": "bbd0f06f-5393-43c8-ab98-603f3247e395",
       "name": "log_result"
@@ -667,7 +609,7 @@
       "name": "Code - Clean Json",
       "type": "n8n-nodes-base.code",
       "position": [
-        1140,
+        1180,
         1100
       ],
       "executeOnce": false,
@@ -712,8 +654,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2460,
-        1100
+        1880,
+        880
       ],
       "id": "36b89e42-166d-4b8b-aee3-8e4a72ebe1ed",
       "name": "Update a row1",
@@ -731,8 +673,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2280,
-        1100
+        1700,
+        880
       ],
       "id": "407473d0-db11-4d58-a155-b92a14f519f5",
       "name": "Processed image"
@@ -774,13 +716,13 @@
     },
     {
       "parameters": {
-        "jsCode": "const inputData = $node['Preprocess Text2']?.json || {};\nconst logResult = $node['log_result']?.json?.data || {}; // Берем весь объект из Find user\n\n// Параметры из входных данных\nconst userId = inputData.user_id || \"0\";\nconst chatId = inputData.chat_id || \"0\";\nconst creationDate = inputData.creation_date || new Date().toISOString();\n\n// Данные для вывода, с приоритетом на logResult для существующих данных\nconst outputData = {\n  id: logResult.id || \"\",\n  user_id: userId,\n  chat_id: chatId,\n  child_name: inputData.child_name || logResult.child_name || \"\",\n  age: inputData.age || logResult.age || 0,\n  gender: inputData.gender || logResult.gender || \"\",\n  prefered_topic: inputData.prefered_topic || logResult.prefered_topic || \"\",\n  object: inputData.object || logResult.object || \"\",\n  problem_topic: inputData.problem_topic || logResult.problem_topic || \"\",\n  style: inputData.style || logResult.style || \"\",\n  tale_text: logResult.tale_text || \"\",\n  creation_date: creationDate\n};\n\n// Отладка\nconsole.log(\"Input Data:\", inputData);\nconsole.log(\"Log Result Data:\", logResult);\n\nif (!inputData || Object.keys(inputData).length === 0) {\n  throw new Error(\"No valid input data from Preprocess Text2\");\n}\n\nreturn [{\n  json: outputData\n}];"
+        "jsCode": "const inputData = $node['Парсер данных от гемини']?.json || {};\nconst logResult = $node['log_result']?.json?.data || {}; // Берем весь объект из Find user\n\n// Параметры из входных данных\nconst userId = inputData.user_id || \"0\";\nconst chatId = inputData.chat_id || \"0\";\nconst creationDate = inputData.creation_date || new Date().toISOString();\n\n// Данные для вывода, с приоритетом на logResult для существующих данных\nconst outputData = {\n  id: logResult.id || \"\",\n  user_id: userId,\n  chat_id: chatId,\n  child_name: inputData.child_name || logResult.child_name || \"\",\n  age: inputData.age || logResult.age || 0,\n  gender: inputData.gender || logResult.gender || \"\",\n  prefered_topic: inputData.prefered_topic || logResult.prefered_topic || \"\",\n  object: inputData.object || logResult.object || \"\",\n  problem_topic: inputData.problem_topic || logResult.problem_topic || \"\",\n  style: inputData.style || logResult.style || \"\",\n  tale_text: logResult.tale_text || \"\",\n  creation_date: creationDate\n};\n\n// Отладка\nconsole.log(\"Input Data:\", inputData);\nconsole.log(\"Log Result Data:\", logResult);\n\nif (!inputData || Object.keys(inputData).length === 0) {\n  throw new Error(\"No valid input data from Preprocess Text2\");\n}\n\nreturn [{\n  json: outputData\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -340,
-        900
+        -300,
+        960
       ],
       "id": "30a10040-a63e-4d54-94df-913d092ed7b7",
       "name": "Determine Action"
@@ -893,7 +835,7 @@
       "typeVersion": 2.2,
       "position": [
         -120,
-        900
+        960
       ],
       "id": "217b86f2-b64e-481b-aed3-8dcf7674ecf3",
       "name": "If"
@@ -911,8 +853,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1980,
-        640
+        1740,
+        620
       ],
       "id": "bceb9dc6-c6f9-4921-ad61-efd7a79d60f1",
       "name": "Send a photo message",
@@ -933,8 +875,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1560,
-        640
+        1320,
+        620
       ],
       "id": "e6e50dc0-5a5a-47e2-952c-229b45c0cff2",
       "name": "Merge"
@@ -983,7 +925,7 @@
         "messages": {
           "message": [
             {
-              "content": "=You are a creative copywriter and storyteller, specializing in crafting engaging titles and descriptions for children's content. Your task is to generate a creative, kind headline and a short description based on the provided fairy tale text.\n\nInput Fairy Tale:\n{{ $json.data }}\n\nTask:\nBased on the text above, create the following:\n\n    A Headline: It should be creative, kind, and capture the main essence of the story. The answer should contain only the output without \"Headline\".\n\n    A Short Description: It must be warm, inviting, and no longer than 100 characters.\n\nThe final output should be suitable for a children's story platform, sparking curiosity in both kids and parents. The answer should contain only the output without \"A Short Description\".\n"
+              "content": "=You are a creative copywriter and storyteller, specializing in crafting engaging titles and descriptions for children's content. Your task is to generate a creative, kind headline and a short description based on the provided fairy tale text.\n\nInput Fairy Tale:\n{{ $json.output }}\n\nTask:\nBased on the text above, create the following:\n\n    A Headline: It should be creative, kind, and capture the main essence of the story. The answer should contain only the output without \"Headline\".\n\n    A Short Description: It must be warm, inviting, and no longer than 100 characters.\n\nThe final output should be suitable for a children's story platform, sparking curiosity in both kids and parents. The answer should contain only the output without \"A Short Description\".\n"
             }
           ]
         },
@@ -993,7 +935,7 @@
       "type": "n8n-nodes-base.perplexity",
       "typeVersion": 1,
       "position": [
-        1320,
+        1040,
         640
       ],
       "id": "e8fea4a8-c129-4525-b32f-d85a773f8f72",
@@ -1011,7 +953,7 @@
         "messages": {
           "message": [
             {
-              "content": "=Create a concise image generation prompt in English (up to 100 words) for the fairy tale below. Include key plot elements, central characters, visual style (e.g., watercolor, cartoonish), and a child-appropriate, hopeful mood. Use these details:\n- Tale text: {{ $json.data }}\nReturn only the image generation prompt, describing the key scene, characters, and atmosphere suitable for the child's age."
+              "content": "=Create a concise image generation prompt in English (up to 100 words) for the fairy tale below. Include key plot elements, central characters, visual style (e.g., watercolor, cartoonish), and a child-appropriate, hopeful mood. Use these details:\n- Tale text: {{ $json.output }}\nReturn only the image generation prompt, describing the key scene, characters, and atmosphere suitable for the child's age."
             }
           ]
         },
@@ -1021,8 +963,8 @@
       "type": "n8n-nodes-base.perplexity",
       "typeVersion": 1,
       "position": [
-        920,
-        1100
+        1060,
+        880
       ],
       "id": "ce8cfaba-afa6-4fa7-a11f-54bd194ef158",
       "name": "Промпт для картинки",
@@ -1058,35 +1000,12 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1740,
-        640
+        1500,
+        620
       ],
       "id": "2fbf59af-9022-4638-839b-31b65769f1b5",
       "alwaysOutputData": true,
       "notes": "Save audio file"
-    },
-    {
-      "parameters": {
-        "updates": [
-          "message"
-        ],
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegramTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -1100,
-        580
-      ],
-      "id": "ad095efd-b8c5-466d-827c-f14e470c1d8b",
-      "name": "Telegram Trigger Response",
-      "webhookId": "c88974df-a9a5-49cf-96ab-bc9ca385dc18",
-      "credentials": {
-        "telegramApi": {
-          "id": "rktMjqgMcM7jAuOr",
-          "name": "Testbot for tales Korvin"
-        }
-      }
     },
     {
       "parameters": {
@@ -1097,8 +1016,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        120,
-        560
+        -460,
+        520
       ],
       "id": "2749afa2-5467-4f5a-a3b0-8c18e77429b5",
       "name": "Send a text message2",
@@ -1127,8 +1046,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -400,
-        580
+        -1020,
+        540
       ],
       "id": "bc9b38d3-7c28-4a12-a2b5-34745acca348",
       "name": "Get a row",
@@ -1162,8 +1081,8 @@
       "type": "n8n-nodes-base.perplexity",
       "typeVersion": 1,
       "position": [
-        -720,
-        580
+        -1240,
+        540
       ],
       "id": "047af78d-c419-432a-a422-47696a96720f",
       "name": "Message a model",
@@ -1231,226 +1150,134 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -180,
-        580
+        -760,
+        540
       ],
       "id": "31a86b5a-3f99-4d96-9b39-05ce44709159",
       "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {
+          "maxOutputTokens": 2048
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        600,
+        480
+      ],
+      "id": "0b768af9-4035-4955-8670-5f96b188efbe",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fYSkEV3vkLUFmRDr",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0ca8cccc-d757-4596-b836-1a31495304e6",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "найди, повтори",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1400,
+        700
+      ],
+      "id": "f033c0d7-f4c8-4f09-81b5-5676abab60b0",
+      "name": "If1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {
+          "maxOutputTokens": 1024
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1240,
+        820
+      ],
+      "id": "1339cefc-a7fc-4f2d-91a7-b95974baee90",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fYSkEV3vkLUFmRDr",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const geminiOutput = $input.first()?.json || {};\nconst message = $node['Telegram Trigger Response1']?.json?.message || {};\n\nlet parsedData = {};\nlet errorMessage = null;\nlet textOutput = typeof geminiOutput === 'string' ? geminiOutput : geminiOutput.text || '{}';\n\n// Усиленная очистка Markdown и лишних символов\ntry {\n  let cleanText = textOutput\n    .replace(/```json\\s*|\\s*```/g, '') // Удаляем ```json и ```\n    .replace(/^\\s+|\\s+$/g, '') // Удаляем пробелы в начале и конце\n    .replace(/\\n\\s*/g, ''); // Удаляем переносы строк\n  // Проверка на валидность JSON\n  if (!cleanText.startsWith('{') || !cleanText.endsWith('}')) {\n    throw new Error(\"Invalid JSON: Output does not start with { or end with }\");\n  }\n  parsedData = JSON.parse(cleanText);\n} catch (error) {\n  errorMessage = error.message || \"Invalid format: Expected pure JSON, but received Markdown or invalid JSON\";\n  console.error(\"Error parsing JSON from Gemini:\", errorMessage);\n  parsedData = {};\n  // Формируем сообщение парсера\n  const parserMessage = `\n\n  `;\n  console.log(\"Parser message for retry:\", parserMessage);\n}\n\n// Формируем выход, сохраняя только извлеченные поля\nreturn [{\n  json: {\n    user_id: message?.from?.id || \"0\",\n    chat_id: message?.chat?.id || \"0\",\n    child_name: parsedData.child_name || \"\",\n    age: parsedData.age || null,\n    gender: parsedData.gender || \"\",\n    prefered_topic: parsedData.prefered_topic || \"\",\n    object: parsedData.object || \"\",\n    problem_topic: parsedData.problem_topic || \"\",\n    style: parsedData.style || \"\",\n    creation_date: new Date().toISOString(),\n    raw_text: message?.text || \"\",\n    \n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        960
+      ],
+      "id": "894ecce2-c808-4aa3-84c1-3e802335c421",
+      "name": "Парсер данных от гемини"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an expert in extracting data from text. Your task is to analyze the user's message and extract the following fields: child_name, age, gender, prefered_topic, object, problem_topic, style. Rules:\\n- child_name: Extract the child's name, return '' if not specified.\\n- age: Extract the child's age (number), return null if not specified.\\n- gender: Extract the child's gender ('М', 'Ж', or 'Н' for neutral), return '' if not specified.\\n- prefered_topic: Extract the first mentioned character or item, return '' if not specified.\\n- object: Extract all characters or items mentioned, join with commas, return '' if not specified.\\n- problem_topic: Extract the first sentence describing the problem, return '' if not specified.\\n- style: Infer the story style ('веселый', 'поучительный', 'успокаивающий') from context (e.g., 'хитро' or 'обвела вокруг пальца' suggest 'веселый'), return '' if unclear.\\nOutput format: ONLY pure JSON, starting with { and ending with }. ABSOLUTELY NO ```json, NO Markdown, NO extra text, NO comments, NO additional lines. Any response with ```json or Markdown is invalid and will be rejected. Include only fields that are explicitly extracted; omit fields with no data. If no data is extracted, return {}. Example:\\n{\\n  \\\"prefered_topic\\\": \\\"персонаж\\\",\\n  \\\"object\\\": \\\"персонаж, другой персонаж\\\",\\n  \\\"problem_topic\\\": \\\"описание проблемы\\\",\\n  \\\"style\\\": \\\"поучительный\\\"\\n}\\n--------------\\nIf your completion does not satisfy these constraints, you will receive an error and must try again. Only respond with the JSON output that satisfies the constraints.\\n--------------\\nCurrent user message: {{ $json.message.text }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -1060,
+        720
+      ],
+      "id": "2e32b8a1-2b29-49a6-922c-5d7304fc45b5",
+      "name": "Basic LLM Chain",
+      "alwaysOutputData": true
     }
   ],
-  "pinData": {
-    "Update a row": [
-      {
-        "json": {
-          "id": "f3d77310-e19e-4b21-8bcc-682736661f05",
-          "user_id": 1712474014,
-          "chat_id": 1712474014,
-          "child_name": "Имя - Анна",
-          "age": 4,
-          "gender": "Ж",
-          "prefered_topic": "любит котят",
-          "object": "котенка Кроху",
-          "problem_topic": "нежелание делиться",
-          "style": "веселый",
-          "tale_text": "",
-          "creation_date": "2025-07-24T10:17:27.027+00:00"
-        }
-      }
-    ],
-    "Промпт для картинки": [
-      {
-        "json": {
-          "id": "f63f0f50-21e3-4874-b9a8-2fa37145cc37",
-          "model": "sonar-pro",
-          "created": 1753431872,
-          "usage": {
-            "prompt_tokens": 468,
-            "completion_tokens": 98,
-            "total_tokens": 566,
-            "search_context_size": "low"
-          },
-          "citations": [
-            "https://lukomoryefolklore.wordpress.com/2020/10/29/cat-bayun/",
-            "https://en.wikipedia.org/wiki/Silver_Hoof",
-            "https://www.rachaelkoppendrayer.com/portfolio/russian-fairy-tale/",
-            "https://www.goodreads.com/book/show/5988782-koshka-s-tales",
-            "https://www.youtube.com/watch?v=xmUUVqmXM6o"
-          ],
-          "search_results": [
-            {
-              "title": "Cat Bayun - Lukomorye - WordPress.com",
-              "url": "https://lukomoryefolklore.wordpress.com/2020/10/29/cat-bayun/",
-              "date": "2020-10-29",
-              "last_updated": "2025-07-25"
-            },
-            {
-              "title": "Silver Hoof",
-              "url": "https://en.wikipedia.org/wiki/Silver_Hoof",
-              "date": "2025-01-02",
-              "last_updated": "2025-03-29"
-            },
-            {
-              "title": "The Learned Cat: A Russian Fairy Tale",
-              "url": "https://www.rachaelkoppendrayer.com/portfolio/russian-fairy-tale/",
-              "date": "2024-12-12",
-              "last_updated": "2025-02-15"
-            },
-            {
-              "title": "Koshka's Tales: Stories from Russia by James Mayhew",
-              "url": "https://www.goodreads.com/book/show/5988782-koshka-s-tales",
-              "date": null,
-              "last_updated": null
-            },
-            {
-              "title": "Zhiharka, Kolobok, The Cat and The Fox | Super Toons - ...",
-              "url": "https://www.youtube.com/watch?v=xmUUVqmXM6o",
-              "date": "2025-02-25",
-              "last_updated": "2025-07-01"
-            }
-          ],
-          "object": "chat.completion",
-          "choices": [
-            {
-              "index": 0,
-              "finish_reason": "stop",
-              "message": {
-                "role": "assistant",
-                "content": "A tiny, brave kitten named Kroha, just a bit larger than a toy mouse, sets off from her cozy woodland cottage into a sun-dappled, flower-filled forest. She helps a small bee tangled in branches, meets a wise owl, and guides a lost bunny to his mother. Illustrate in soft watercolor style, with cheerful, bright colors, gentle forest light, and a hopeful, child-friendly mood, capturing Kroha’s kind heart and her magical, uplifting adventure."
-              },
-              "delta": {
-                "role": "assistant",
-                "content": ""
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "Code - Get Prompt1": [
-      {
-        "json": {
-          "inputs": "A tiny, brave kitten named Kroha, just a bit larger than a toy mouse, sets off from her cozy woodland cottage into a sun-dappled, flower-filled forest. She helps a small bee tangled in branches, meets a wise owl, and guides a lost bunny to his mother. Illustrate in soft watercolor style, with cheerful, bright colors, gentle forest light, and a hopeful, child-friendly mood, capturing Kroha’s kind heart and her magical, uplifting adventure.",
-          "parameters": {
-            "negative_prompt": "blurry, low quality"
-          }
-        }
-      }
-    ],
-    "Telegram Trigger Response": [
-      {
-        "json": {
-          "update_id": 923344198,
-          "message": {
-            "message_id": 30,
-            "from": {
-              "id": 1712474014,
-              "is_bot": false,
-              "first_name": "Po °❀⋆.ೃ࿔*:･",
-              "last_name": "Ly ઇଓ ִֶָ",
-              "username": "PoLy_Samborskaya",
-              "language_code": "ru"
-            },
-            "chat": {
-              "id": 1712474014,
-              "first_name": "Po °❀⋆.ೃ࿔*:･",
-              "last_name": "Ly ઇଓ ִֶָ",
-              "username": "PoLy_Samborskaya",
-              "type": "private"
-            },
-            "date": 1753437165,
-            "text": "найди сказку про кроху"
-          }
-        }
-      }
-    ],
-    "Message a model": [
-      {
-        "json": {
-          "id": "a195b4e5-639b-4918-acc0-07aabeae5085",
-          "model": "sonar-pro",
-          "created": 1753443887,
-          "usage": {
-            "prompt_tokens": 133,
-            "completion_tokens": 3,
-            "total_tokens": 136,
-            "search_context_size": "low"
-          },
-          "citations": [
-            "https://citaty.info/character/velikan-anton-kroha",
-            "https://nsportal.ru/detskiy-sad/materialy-dlya-roditeley/2017/10/01/osobennosti-chteniya-skazok-o-zhivotnyh",
-            "https://www.livelib.ru/review/4557536-skazki-printsessy-krohi-evgeniya-spiteri",
-            "https://db.chgk.info/random/from_2014-01-01/answers/types12/256011559/limit1000",
-            "https://www.youtube.com/watch?v=TarX2qxxC0E"
-          ],
-          "search_results": [
-            {
-              "title": "Великан Антон / «Кроха»: 1 цитата персонажа",
-              "url": "https://citaty.info/character/velikan-anton-kroha",
-              "date": null,
-              "last_updated": null
-            },
-            {
-              "title": "особенности чтения сказок о животных | Консультация на тему",
-              "url": "https://nsportal.ru/detskiy-sad/materialy-dlya-roditeley/2017/10/01/osobennosti-chteniya-skazok-o-zhivotnyh",
-              "date": "2017-10-01",
-              "last_updated": "2025-06-07"
-            },
-            {
-              "title": "Между нами, принцессами или как одна маленькая ...",
-              "url": "https://www.livelib.ru/review/4557536-skazki-printsessy-krohi-evgeniya-spiteri",
-              "date": "2024-10-25",
-              "last_updated": null
-            },
-            {
-              "title": "Случайный пакет | Что? Где? Когда?. - db .chgk. info",
-              "url": "https://db.chgk.info/random/from_2014-01-01/answers/types12/256011559/limit1000",
-              "date": "2014-01-01",
-              "last_updated": "2025-07-24"
-            },
-            {
-              "title": "Что такое хорошо и что такое плохо Маяковский Сказки ...",
-              "url": "https://www.youtube.com/watch?v=TarX2qxxC0E",
-              "date": "2021-01-26",
-              "last_updated": "2025-05-06"
-            }
-          ],
-          "object": "chat.completion",
-          "choices": [
-            {
-              "index": 0,
-              "finish_reason": "stop",
-              "message": {
-                "role": "assistant",
-                "content": "Кроха"
-              },
-              "delta": {
-                "role": "assistant",
-                "content": ""
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "Get a row": [
-      {
-        "json": {
-          "id": 29,
-          "user_id": 1712474014,
-          "tale_text": "Жила-была маленькая кошечка по имени Кроха. Она была очень милой и веселой, с пушистым мехом и огромными выразительными глазами. Кроха обожала играть с игрушками и особенно любила свой самый любимый мячик, который был ярко-розового цвета. Но вот беда: Кроха совершенно не хотела делиться им с другими! Каждый день, когда её друзья — котята Мила и Пухля — приходили поиграть, Кроха держала свой мячик крепко при себе и не позволяла никому к нему приблизиться. — Это мой мячик! — хвасталась Кроха. — Я буду играть одна! Но иногда, когда её друзья играли без неё, Кроха чувствовала себя немного грустной. Она смотрела, как Мила и Пухля веселятся, и ей становилось обидно. Хоть они и звались «друзьями», она никогда не позволяла им присоединиться к игре. Однажды, Кроха сидела на солнышке и думала о том, как хорошо было бы веселиться всем вместе. Вдруг к ней подошла уважаемая старая кошка по имени Сиа, которая была мудрой и всегда знала, как помочь. — Почему ты не играешь с друзьями, Кроха? — спросила Сиа с доброй улыбкой. — Я не хочу делиться своим мячиком! Он только мой, — ответила Кроха, потирая лапкой носик. — Но, — сказала Сиа, — когда ты делишься, ты можешь создать много радостных моментов. Представь себе, как весело будет, если вы будете играть втроём! Кроха задумалась. Она представила, как Мила и Пухля улыбаются, когда они все вместе гоняют мячик по травке. Стало даже немного завидно. — Как ты думаешь, что произойдет, если ты позволишь им поиграть с тобой? — спросила старая кошка. — Наверное, я буду чувствовать себя лучше, — тихо ответила Кроха. — Точно! — воскликнула Сиа. — Давай попробуем. Кроха собрала все свои силы и протянула мячик друзьям. — Мила, Пухля, хотите поиграть вместе? — тихо спросила она. Тут же на их лицах расцвели улыбки! Они начали гонять мячик туда-сюда, смеяться и веселиться вместе. Кроха почувствовала, как её сердце наполнило тепло. Ей стало легко и радостно, ведь она теперь знала, что делиться — это прекрасно! С тех пор маленькая котенка Кроха всегда играла вместе со своими друзьями, и они делали каждую игру особенной. Объединившись, они могли создавать самые удивительные приключения, полные смеха и радости. **Сказка о котенке К",
-          "created_at": "2025-07-24T14:45:54.744054",
-          "embedding": null,
-          "image_url": null
-        }
-      }
-    ]
-  },
   "connections": {
     "Telegram Trigger Response1": {
       "main": [
         [
           {
-            "node": "Preprocess Text2",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -1513,17 +1340,6 @@
         ]
       ]
     },
-    "OpenAI Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Code3": {
       "main": [
         [
@@ -1580,17 +1396,6 @@
         [
           {
             "node": "Send a text message",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Preprocess Text2": {
-      "main": [
-        [
-          {
-            "node": "Preserve Data",
             "type": "main",
             "index": 0
           }
@@ -1692,22 +1497,22 @@
         ]
       ]
     },
-    "Merge": {
+    "Send a photo message": {
       "main": [
         [
           {
-            "node": "Save Image",
+            "node": "Send a text message1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send a photo message": {
+    "Merge": {
       "main": [
         [
           {
-            "node": "Send a text message1",
+            "node": "Save Image",
             "type": "main",
             "index": 0
           }
@@ -1774,17 +1579,6 @@
         ]
       ]
     },
-    "Telegram Trigger Response": {
-      "main": [
-        [
-          {
-            "node": "Message a model",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get a row": {
       "main": [
         [
@@ -1816,9 +1610,65 @@
             "index": 0
           }
         ],
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
         [
           {
-            "node": "Preprocess Text2",
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Парсер данных от гемини": {
+      "main": [
+        [
+          {
+            "node": "Preserve Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Парсер данных от гемини",
             "type": "main",
             "index": 0
           }
@@ -1826,15 +1676,35 @@
       ]
     }
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
+  "pinData": {
+    "Telegram Trigger Response1": [
+      {
+        "update_id": 923344205,
+        "message": {
+          "message_id": 56,
+          "from": {
+            "id": 1712474014,
+            "is_bot": false,
+            "first_name": "Po °❀⋆.ೃ࿔*:･",
+            "last_name": "Ly ઇଓ ִֶָ",
+            "username": "PoLy_Samborskaya",
+            "language_code": "ru"
+          },
+          "chat": {
+            "id": 1712474014,
+            "first_name": "Po °❀⋆.ೃ࿔*:･",
+            "last_name": "Ly ઇଓ ִֶָ",
+            "username": "PoLy_Samborskaya",
+            "type": "private"
+          },
+          "date": 1753781125,
+          "text": "приветик, нужна сказка про Лису-красу и хитрожопого мужика, который хотел красивую шкуру, но оказался с носом. Как умница-лиса его обвела вокруг пальца."
+        }
+      }
+    ]
   },
-  "versionId": "b4f46350-614e-4c3b-b11a-f5bcca3771d1",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "eede5a0f19a88813312a63afca12c1745489ee42d3a347c580ae58112f7bc486"
-  },
-  "id": "s0utv35VyertNS7e",
-  "tags": []
+  }
 }
